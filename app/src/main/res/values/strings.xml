@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">IfWhenVar8</string>
+    <string name="label_age">Возраст</string>
+    <string name="hint_age">Введите возраст</string>
+    <string name="button_ok">OK</string>
+    <string name="msg_young">Вы слишком молоды!</string>
+    <string name="msg_promotion">Поздравляем с повышением!</string>
+    <string name="msg_watch">Преподносим вам золотые часы!</string>
+    <string name="msg_old">Вы слишком стары!</string>
+    <string name="msg_experience">Продолжайте накапливать опыт!</string>
+    <string name="error_empty">Введите возраст</string>
+    <string name="error_not_number">Введите целое число</string>
+</resources>
