@@ -69,3 +69,12 @@ fun AgeScreen(modifier: Modifier = Modifier) {
 fun AgeScreenPreview() {
     AgeScreen()
 }
+
+// Возвращает сообщение для введённого возраста
+fun getAgeMessage(age: Int): String = when (age) {
+    in Int.MIN_VALUE..20 -> "Вы слишком молоды!"
+    30, 40, 50, 60       -> "Поздравляем с повышением!"
+    65                   -> "Преподносим вам золотые часы!"
+    in 66..Int.MAX_VALUE -> "Вы слишком стары!"
+    else                 -> "Продолжайте накапливать опыт!"
+}
