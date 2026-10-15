@@ -36,6 +36,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AgeScreen(modifier: Modifier = Modifier) {
     var input by remember { mutableStateOf("") }
+    var result by remember { mutableStateOf("") }
 
     Column(
         modifier = modifier
@@ -54,7 +55,12 @@ fun AgeScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier.weight(1f)
             )
         }
-        // ШАГ 3: сюда добавим результат и кнопку
+        Spacer(Modifier.height(24.dp))
+        Text(text = result, fontSize = 20.sp)
+        Spacer(Modifier.height(24.dp))
+        Button(onClick = { result = input }) {
+            Text("OK")
+        }
     }
 }
 
