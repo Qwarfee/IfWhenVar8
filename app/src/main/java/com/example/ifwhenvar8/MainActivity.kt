@@ -38,8 +38,10 @@ fun AgeScreen(modifier: Modifier = Modifier) {
     var input by remember { mutableStateOf("") }
     var result by remember { mutableStateOf("") }
     var error by remember { mutableStateOf("") }
+    val focusManager = LocalFocusManager.current
 
     fun onOkClick() {
+        focusManager.clearFocus()
         val text = input.trim()
 
         if (text.isEmpty()) {
@@ -70,14 +72,21 @@ fun AgeScreen(modifier: Modifier = Modifier) {
             Spacer(Modifier.width(12.dp))
             OutlinedTextField(
                 value = input,
-                onValueChange = {
-                    input = it
-                    error = ""
+                onValueChange = { new ->
+                    if (new.length <= 3 && new.all { it.isDigit() }) {
+                        input = new
+                        error = ""
+                    }
                 },
                 isError = error.isNotEmpty(),
                 supportingText = { if (error.isNotEmpty()) Text(error) },
                 label = { Text("Введите возраст") },
                 singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(onDone = { onOkClick() }),
                 modifier = Modifier.weight(1f)
             )
         }
