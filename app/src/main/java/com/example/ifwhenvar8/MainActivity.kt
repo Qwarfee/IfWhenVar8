@@ -37,6 +37,27 @@ class MainActivity : ComponentActivity() {
 fun AgeScreen(modifier: Modifier = Modifier) {
     var input by remember { mutableStateOf("") }
     var result by remember { mutableStateOf("") }
+    var error by remember { mutableStateOf("") }
+
+    fun onOkClick() {
+        val text = input.trim()
+
+        if (text.isEmpty()) {
+            error = "Введите возраст"
+            result = ""
+            return
+        }
+
+        val age = text.toIntOrNull()
+        if (age == null) {
+            error = "Введите целое число"
+            result = ""
+            return
+        }
+
+        error = ""
+        result = getAgeMessage(age)
+    }
 
     Column(
         modifier = modifier
@@ -49,7 +70,12 @@ fun AgeScreen(modifier: Modifier = Modifier) {
             Spacer(Modifier.width(12.dp))
             OutlinedTextField(
                 value = input,
-                onValueChange = { input = it },
+                onValueChange = {
+                    input = it
+                    error = ""
+                },
+                isError = error.isNotEmpty(),
+                supportingText = { if (error.isNotEmpty()) Text(error) },
                 label = { Text("Введите возраст") },
                 singleLine = true,
                 modifier = Modifier.weight(1f)
@@ -58,7 +84,7 @@ fun AgeScreen(modifier: Modifier = Modifier) {
         Spacer(Modifier.height(24.dp))
         Text(text = result, fontSize = 20.sp)
         Spacer(Modifier.height(24.dp))
-        Button(onClick = { result = input }) {
+        Button(onClick = { onOkClick() }) {
             Text("OK")
         }
     }
